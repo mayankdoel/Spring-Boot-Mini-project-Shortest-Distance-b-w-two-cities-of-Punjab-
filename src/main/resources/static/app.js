@@ -68,7 +68,7 @@ function findRoute() {
             }
         })
         .catch(() => {
-            errMsg.textContent = '⚠️ Server error. Make sure Spring Boot is running on port 8080.';
+            errMsg.textContent = '⚠️ Server error. Make sure Spring Boot is running on port 5001.';
             errMsg.style.display = 'block';
             resultBox.style.display = 'none';
         });
