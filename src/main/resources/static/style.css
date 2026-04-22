@@ -424,6 +424,32 @@ select:focus {
     letter-spacing: .5px;
 }
 
+.roads-title {
+    margin-top: 18px;
+}
+
+.roads-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.road-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border: 1px solid #bfdbfe;
+    color: #1d4ed8;
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+    box-shadow: 0 4px 14px rgba(37,99,235,.12);
+}
+
 .map-title { margin-top: 20px; }
 
 .map-panel {

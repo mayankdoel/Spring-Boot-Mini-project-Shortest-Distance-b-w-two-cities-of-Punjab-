@@ -8,6 +8,7 @@ const citySelect2 = document.getElementById('city2');
 const errMsg = document.getElementById('errMsg');
 const resultBox = document.getElementById('resultBox');
 const mapStatus = document.getElementById('mapStatus');
+const roadsList = document.getElementById('roadsList');
 
 window.addEventListener('load', async () => {
     try {
@@ -139,6 +140,8 @@ function findRoute() {
 
 function renderRoute(data) {
     const stops = data.numberOfStops;
+    const roadsUsed = [...new Set((data.segments || []).map(segment => segment.highway))];
+
     document.getElementById('summaryCols').innerHTML = `
     <div class="sum-circle">
       <div class="s-icon">KM</div>
@@ -155,6 +158,10 @@ function renderRoute(data) {
       <div class="s-val">${stops < 1 ? 'Direct' : stops}</div>
       <div class="s-lbl">${stops < 1 ? 'Route' : 'Via Cities'}</div>
     </div>`;
+
+    roadsList.innerHTML = roadsUsed.length
+        ? roadsUsed.map(road => `<span class="road-pill">${road}</span>`).join('')
+        : '<span class="road-pill">Direct local road</span>';
 
     const path = data.cityPath;
     const segments = data.segments;
@@ -235,9 +242,16 @@ function renderMapRoute(data) {
             .addTo(routeMarkersLayer);
     });
 
-    mapStatus.textContent =
-        `${data.source} to ${data.destination} with ${Math.max(data.numberOfStops, 0)} stop(s).`;
+    const roadSummary = [...new Set((data.segments || []).map(segment => segment.highway))].join(', ');
+    mapStatus.textContent = roadSummary
+        ? `${data.source} to ${data.destination} through ${roadSummary}.`
+        : `${data.source} to ${data.destination} with ${Math.max(data.numberOfStops, 0)} stop(s).`;
 
-    routeMap.fitBounds(L.latLngBounds(latLngs).pad(0.4));
-    setTimeout(() => routeMap.invalidateSize(), 150);
+    setTimeout(() => {
+        routeMap.invalidateSize();
+        routeMap.flyToBounds(L.latLngBounds(latLngs).pad(0.35), {
+            padding: [24, 24],
+            duration: 0.8
+        });
+    }, 120);
 }
