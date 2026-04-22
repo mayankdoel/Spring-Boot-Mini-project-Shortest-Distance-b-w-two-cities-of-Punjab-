@@ -88,6 +88,10 @@ public class DijkstraService {
         res.setSource(source);
         res.setDestination(destination);
         res.setCityPath(path);
+        res.setRouteCities(path.stream()
+                .map(graphService.getCities()::get)
+                .filter(Objects::nonNull)
+                .toList());
         res.setSegments(segments);
         res.setTotalDistanceKm(total);
         res.setTotalEstimatedTime(formatTime(total));

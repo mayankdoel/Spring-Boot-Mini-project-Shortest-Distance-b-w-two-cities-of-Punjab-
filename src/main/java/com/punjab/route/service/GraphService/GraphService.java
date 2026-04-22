@@ -104,4 +104,9 @@ public class GraphService {
     public List<String> getCityNames() {
         return cities.keySet().stream().sorted().toList();
     }
+    public List<City> getCityDetails() {
+        return cities.values().stream()
+                .sorted(Comparator.comparing(City::getName))
+                .toList();
+    }
 }

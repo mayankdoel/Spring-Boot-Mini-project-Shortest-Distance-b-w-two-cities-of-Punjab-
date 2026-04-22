@@ -1,6 +1,7 @@
 package com.punjab.route.controller;
 
 import com.punjab.route.model.RouteResponse;
+import com.punjab.route.model.City;
 import com.punjab.route.service.DijkstraService;
 import com.punjab.route.service.GraphService;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,11 @@ public class RouteController {
     @GetMapping("/cities")
     public ResponseEntity<List<String>> getCities() {
         return ResponseEntity.ok(graphService.getCityNames());
+    }
+
+    @GetMapping("/cities/details")
+    public ResponseEntity<List<City>> getCityDetails() {
+        return ResponseEntity.ok(graphService.getCityDetails());
     }
 
     // ✅ GET shortest route
