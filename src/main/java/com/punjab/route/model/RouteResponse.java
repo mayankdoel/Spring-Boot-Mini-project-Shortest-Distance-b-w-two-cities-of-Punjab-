@@ -6,6 +6,7 @@ public class RouteResponse {
     private String       source;
     private String       destination;
     private List<String> cityPath;
+    private List<City>   routeCities;
     private List<RouteSegment> segments;
     private int          totalDistanceKm;
     private String       totalEstimatedTime;
@@ -18,6 +19,8 @@ public class RouteResponse {
     public void   setDestination(String d)      { destination = d; }
     public List<String> getCityPath()           { return cityPath; }
     public void   setCityPath(List<String> p)   { cityPath = p; }
+    public List<City> getRouteCities()          { return routeCities; }
+    public void   setRouteCities(List<City> c)  { routeCities = c; }
     public List<RouteSegment> getSegments()             { return segments; }
     public void   setSegments(List<RouteSegment> s)     { segments = s; }
     public int    getTotalDistanceKm()          { return totalDistanceKm; }
